@@ -19,7 +19,7 @@
                 <div class="hello">Hello there!<br>My name is</div>
                 <div class="name">Tristan</div>
             </div>
-            <img src="IMG_20230218_090242_866.webp" class="image"></img>
+            <img src="IMG_20230218_090242_866.png" class="image"></img>
         </div>
         <div class="scroll" onclick="scrollToTop()">
             <svg width="28" height="17" viewBox="0 0 28 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="fleche">
@@ -33,11 +33,19 @@
             </div>
             <div class="content">
                 <div class="infos">
-                    <div class="age">Hi! I'm Tristan, a 17-year-old high school senior studying in the <a href="https://www.letudiant.fr/bac/qu-est-ce-qu-un-bac-sti2d.html">STI2D program</a>, with a passion for web development.<br>Originally from Paris, I dedicate myself with incredible motivation to various computing projects.<br> <br>Feel free to contact me through the links below for discussions or collaborations:
+                    <div class="bio">Hi! I'm Tristan, a 17-year-old high school senior studying in the <a href="https://www.letudiant.fr/bac/qu-est-ce-qu-un-bac-sti2d.html">STI2D program</a>, with a passion for web development.<br>Originally from Paris, I dedicate myself with incredible motivation to various computing projects.<br> <br>Feel free to contact me through the links below for discussions or collaborations:
                     </div>
                 </div>
-                <div class="button">coucou</div>
-                <div class="button">coucou</div>
+                <h1>Contact Form</h1>
+                <form action="https://formsubmit.co/el/yatabo" method="post" onsubmit="return validateForm()">
+                    <input type="text" id="fullName" name="name" placeholder="Full Name">
+                    <input type="email" id="email" name="email" placeholder="Email">
+                    <textarea id="message" name="Message" placeholder="Message" rows="4"></textarea>
+                    <div class="suberror">
+                        <button type="submit" class="send" id="submitButton">Send</button>
+                        <div class="error-message" id="error-message">Complétez tous les champs requis.</div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -45,22 +53,48 @@
 </html>
 
 <script>
-    function scrollToTop() {
-            const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+document.addEventListener('DOMContentLoaded', function () {
+    const sendButton = document.querySelector('.send');
+    const nameInput = document.querySelector('input[name="Name"]');
+    const emailInput = document.querySelector('input[name="Email"]');
+    const messageTextarea = document.querySelector('textarea[name="Message"]');
 
-            if (currentScroll > 300) {
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-            } else {
-                window.scrollTo({
-                    top: 600,
-                    behavior: 'smooth'
-                });
-            }
+    sendButton.addEventListener('mouseenter', function () {
+        if (!nameInput.value.trim() || !emailInput.value.trim() || !messageTextarea.value.trim()) {
+            sendButton.style.color = 'red';
         }
-    
+    });
+
+    sendButton.addEventListener('mouseleave', function () {
+        sendButton.style.color = ''; // Remise à zéro de la couleur
+    });
+
+    sendButton.addEventListener('click', function (event) {
+        if (!nameInput.value.trim() || !emailInput.value.trim() || !messageTextarea.value.trim()) {
+            event.preventDefault();
+            errorMessage.style.display = 'block';
+
+            // Masquer le message d'erreur après 1000 millisecondes (1 seconde)
+            setTimeout(function () {
+                errorMessage.style.display = 'none';
+            }, 2000);
+        }
+    });
+});
+
+const errorMessage = document.getElementById('error-message');
+const form = document.querySelector('form');
+
+function scrollToTop() {
+    const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+    const topValue = currentScroll > 300 ? 0 : 600;
+
+    window.scrollTo({
+        top: topValue,
+        behavior: 'smooth'
+    });
+}
+
 const parallaxImage = document.querySelector('.image');
 const parallaxText = document.querySelector('.text');
 
@@ -69,6 +103,22 @@ function handleParallax() {
     parallaxImage.style.transform = `translateY(-${scrollPosition * 0.2}px)`;
     parallaxText.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
 }
+
 window.addEventListener('scroll', handleParallax);
 
+form.addEventListener('submit', function (event) {
+    const nameInput = document.getElementById('fullName');
+    const emailInput = document.getElementById('email');
+    const messageTextarea = document.getElementById('message');
+
+    if (!nameInput.value.trim() || !emailInput.value.trim() || !messageTextarea.value.trim()) {
+        event.preventDefault();
+        errorMessage.style.display = 'block';
+
+        // Masquer le message d'erreur après 1000 millisecondes (1 seconde)
+        setTimeout(function () {
+            errorMessage.style.display = 'none';
+        }, 2000);
+    }
+});
 </script>
