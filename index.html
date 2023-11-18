@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Website</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="main">
+        <div class="logo">
+            <div class="text">
+                <div class="hello">Hello there!<br>My name is</div>
+                <div class="name">Tristan</div>
+            </div>
+            <img src="IMG_20230218_090242_866.png" class="image"></img>
+        </div>
+        <div class="scroll" onclick="scrollToTop()">
+            <svg width="28" height="17" viewBox="0 0 28 17" fill="none" xmlns="http://www.w3.org/2000/svg" class="fleche">
+                <path d="M2 2L14 14L26 2" stroke="#7C7C7C" stroke-width="4" stroke-linecap="round"/>
+            </svg>
+        </div>
+        <div class="container">
+            <div class="allgrad">
+                <div class="blur"></div>
+                <div class="gradien"></div>
+            </div>
+            <div class="content">
+                <div class="infos">
+                    <div class="age">Hi! I'm Tristan, a 17-year-old high school senior studying in the <a href="https://www.letudiant.fr/bac/qu-est-ce-qu-un-bac-sti2d.html">STI2D program</a>, with a passion for web development.<br>Originally from Paris, I dedicate myself with incredible motivation to various computing projects.<br> <br>Feel free to contact me through the links below for discussions or collaborations:
+                    </div>
+                </div>
+                <div class="button">coucou</div>
+                <div class="button">coucou</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function scrollToTop() {
+            const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
+
+            if (currentScroll > 300) {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            } else {
+                window.scrollTo({
+                    top: 600,
+                    behavior: 'smooth'
+                });
+            }
+        }
+    
+const parallaxImage = document.querySelector('.image');
+const parallaxText = document.querySelector('.text');
+
+function handleParallax() {
+    const scrollPosition = window.scrollY;
+    parallaxImage.style.transform = `translateY(-${scrollPosition * 0.2}px)`;
+    parallaxText.style.transform = `translateY(-${scrollPosition * 0.3}px)`;
+}
+window.addEventListener('scroll', handleParallax);
+
+</script>
