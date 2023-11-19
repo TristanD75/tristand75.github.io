@@ -37,12 +37,11 @@ a:hover {
 .main {
     margin: auto;
     max-width: 1200px;
-    padding: 20px 20px 20px 20px;
+    padding: 20px;
     height: 100%;
 }
 
 .logo {
-    left: calc(6% - 40px);
     position: relative;
     height: 380px;
     width: 300px;
@@ -51,7 +50,6 @@ a:hover {
 }
 
 .image {
-    border-radius: 40px;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -62,7 +60,9 @@ h1 {
     color: #00da00;
 }
 
-input {
+input,
+textarea {
+    resize: none;
     width: calc(100% - 12px);
     font-family: "Montserrat";
     background-color: transparent;
@@ -76,55 +76,30 @@ input {
     margin: 6px 0px;
 }
 
-input::placeholder {
-    color: rgb(182, 182, 182);
-}
-
-input:focus {
-    transition: all 0.2s ease;
-    border-bottom: #00da00 2px solid;
-}
-
-textarea {
-    background-color: transparent;
-    backdrop-filter: blur(4px);
-    height: auto;
-    margin: 6px 0px;
-    width: calc(100% - 12px);
-    resize: none;
-    height: auto;
-    border-style: none;
-    padding: 6px;
-    font-family: "Montserrat";
-    border-bottom: #ffffff 2px solid;
-    transition: all 0.2s ease;
-    color: white;
-}
-
+input::placeholder,
 textarea::placeholder {
     color: rgb(182, 182, 182);
 }
 
+input:focus,
 textarea:focus {
-    outline: none;
     transition: all 0.2s ease;
     border-bottom: #00da00 2px solid;
 }
 
 ::-webkit-scrollbar {
     width: 4px;
-    background-color: transparent;
     background-color: black;
-  }
+}
 
-  ::-webkit-scrollbar-track {
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-thumb {
     border-radius: 10px;
-  }
+}
 
-  ::-webkit-scrollbar-thumb {
+::-webkit-scrollbar-thumb {
     background: rgb(63, 63, 63);
-    border-radius: 10px;
-  }
+}
 
 .send {
     font-size: 16px;
@@ -158,8 +133,8 @@ textarea:focus {
     cursor: pointer;
     transition: all 0.2s ease;
 }
+
 .l2:hover {
-    transition: all 0.2s ease;
     background-color: rgba(71, 71, 71, 0.5);
 }
 
@@ -172,15 +147,13 @@ textarea:focus {
     gap: 20px;
 }
 
-.github {
-    transform: translateY(-3px);
-}
-
+.github,
 .instagram {
     transform: translateY(-3px);
 }
 
-h2, .author {
+h2,
+.author {
     font-weight: 300;
     font-size: 12px;
     text-align: end;
@@ -188,125 +161,237 @@ h2, .author {
     margin-bottom: 0px;
 }
 
-@media (max-width: 840px) {
+/* Partie média déplacée à l'extérieur de la partie média */
 
-    .allgrad {
-        position: relative;
-        height: 100px;
+.allgrad {
+    position: relative;
+    height: 100px;
+}
+
+.blur {
+    width: 100%;
+    height: 160%;
+    position: absolute;
+    overflow: visible;
+    -webkit-mask: linear-gradient(to top, rgb(0, 0, 0) -40%, rgb(0, 0, 0), transparent);
+    mask: linear-gradient(to top, black, black, transparent);
+    -webkit-filter: blur(4px);
+    filter: blur(4px);
+    backdrop-filter: blur(4px);
+    bottom: 0;
+}
+
+.gradien {
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(255, 255, 255, 0) 100%);
+    height: 100px;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.logo {
+    position: fixed;
+    left: 0;
+    width: 100%;
+}
+
+.image {
+    border-radius: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.main {
+    padding: 0;
+}
+
+.container {
+    position: relative;
+    top: 360px;
+    z-index: 1;
+}
+
+body {
+    background-color: rgb(0, 0, 0);
+}
+
+.content {
+    padding: 20px;
+    position: relative;
+    background-color: black;
+}
+
+.scroll {
+    cursor: pointer;
+    z-index: 10;
+    position: fixed;
+    left: 50%;
+    top: 400px;
+    transform: translateX(-50%);
+    height: 38px;
+    border-radius: 1000px;
+    background-color: rgba(49, 49, 49, 0.5);
+    backdrop-filter: blur(4px);
+    width: 38px;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.scroll:hover {
+    background-color: rgba(71, 71, 71, 0.5);
+}
+
+.scroll:active {
+    background-color: rgba(95, 95, 95, 0.5);
+}
+
+button {
+    border: none;
+    cursor: pointer;
+    background-color: rgba(49, 49, 49, 0.5);
+    backdrop-filter: blur(4px);
+    color: #00da00;
+    font-weight: 500;
+    font-size: 18px;
+    width: fit-content;
+    padding: 8px 16px 8px 16px;
+    border-radius: 1000px;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: rgba(71, 71, 71, 0.5);
+}
+
+.fleche {
+    color: white;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 24px;
+    transform: translate(-50%, -85%);
+}
+
+.bio {
+    font-size: 18px;
+    font-weight: 400;
+    color: rgb(255, 255, 255);
+}
+
+.bio2 {
+    display: none;
+}
+
+.contacts {
+    display: none;
+}
+
+.bio-title {
+    display: none;
+}
+
+@media (min-width: 640px) {
+
+    .main,
+    .logobio {
+        width: 100%;
+        max-width: 1080px;
     }
 
-    .blur {
-        width: 100%;
-        height: 160%;
+    h2,
+    .author {
         position: absolute;
-        overflow: visible;
-        -webkit-mask: linear-gradient(to top,rgb(0, 0, 0), rgb(0, 0, 0), transparent);
-        mask: linear-gradient(to top, black, black, transparent);
-        -webkit-filter: blur(4px);
-        filter: blur(4px);
-        backdrop-filter: blur(4px);
-        bottom: 0;
-    }    
-
-    .gradien {
-        background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgba(255,255,255,0) 100%);
-        height: 100px;
-        width: 100%;
-        position: absolute;
-        bottom: 0;
-    }
-
-    .logo {
-        position: fixed;
-        left: 0;
-        width: 100%;
-    }
-
-    .image {
-        border-radius: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .main {
-        padding: 0;
-    }
-
-    .container {
-        position: relative;
-        top: 360px;
-        z-index: 1;
-    }
-
-    body {
-        background-color: black;
+        font-weight: 300;
+        font-size: 12px;
+        text-align: start;
+        color: rgb(182, 182, 182);
+        width: 200px;
+        margin-bottom: 0px;
+        bottom: 10px;
     }
 
     .content {
-        padding: 20px;
-        position: relative;
-        background-color: rgb(0, 0, 0);
+        display: flex;
+        flex-direction: row;
     }
 
-    .scroll {
-        cursor: pointer;
-        z-index: 10;
-        position: fixed;
-        left: 50%;
-        top: 400px;
-        transform: translateX(-50%);
-        height: 38px;
-        border-radius: 1000px;
-        background-color: rgba(49, 49, 49, 0.5);
-        backdrop-filter: blur(4px);
-        width: 38px;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.2s ease;
+    .form,
+    .bio-link {
+        width: 50%;
     }
 
-    .scroll:hover {
-        transition: all 0.2s ease;
-        background-color: rgba(71, 71, 71, 0.5);
-    }
-
-    .scroll:active {
-        transition: all 0.2s ease;
-        background-color: rgba(95, 95, 95, 0.5);
-    }
-
-    button {
-        border: none;
-        cursor: pointer;
-        background-color: rgba(49, 49, 49, 0.5);
-        backdrop-filter: blur(4px);
-        color: #00da00;
-        font-weight: 500;
-        font-size: 18px;
-        width: fit-content;
-        padding: 8px 16px 8px 16px;
-        border-radius: 1000px;
-        transition: all 0.2s ease;
-    }
-
-    button:hover {
-        transition: all 0.2s ease;
-        background-color: rgba(71, 71, 71, 0.5);
-    }
-
-    .fleche {
-        color: white;
-        position: relative;
-        left: 50%;
-        top: 50%;
-        width: 24px;
-        transform: translate(-50%, -85%);
-    }
-
-    .bio {
+    .contacts {
+        display: block;
         font-size: 18px;
         font-weight: 400;
         color: rgb(255, 255, 255);
+        margin-right: 40px;
+    }
+
+    .body {
+        background-color: black;
+    }
+
+    .text {
+        display: none;
+    }
+
+    .bio2 {
+        margin: 20px 40px;
+        display: block;
+        font-size: 16px;
+        font-weight: 400;
+        color: rgb(182, 182, 182);
+    }
+
+    .logobio {
+        position: fixed;
+        height: 100vh;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        flex-direction: row-reverse;
+    }
+
+    .hello, .name {
+        margin-left: 40px;
+    }
+
+    .hello {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+    .name {
+        font-size: 52px;
+    }
+
+    .logo {
+        max-width: 400px;
+        position: relative;
+        height: 360px;
+        width: 50%;
+    }
+
+    .bio-title {
+        align-self: center;
+        display: block;
+        position: relative;
+        float: right;
+        width: 50%;
+        height: 360px;
+    }
+    
+    .container {
+        top: 85vh;
+    }
+
+    .bio {
+        display: none;
+    }
+
+    .scroll {
+        top: 86%;
     }
 }
