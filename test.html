@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Portfolio</title>
+  <script src="https://unpkg.com/@studio-freight/lenis@1.0.35/dist/lenis.min.js"></script>
+  <style>
+    :root {
+      --url: url("https://wallpapercast.com/media/c59c37c2-c96f-428b-8ec0-290985476e34/d6b59c9e-4d65-4f19-8ea7-fc2a65828bd5.gif");
+      --bc: brightness(150%) contrast(120%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box }
+    body { font-family: Arial, sans-serif; scroll-behavior: smooth }
+    .hero, .section { height: 100vh; display: flex; align-items: center; justify-content: center }
+    .hero { background: #000; position: relative; overflow: hidden }
+    .screen {
+      position: fixed; width: 200px; height: 200px; border-radius: 15px;
+      transform-style: preserve-3d; background: var(--url) center/cover no-repeat;
+      z-index: 9999; transition: all .1s ease;
+    }
+    .plane {
+      position: absolute; top: 0; right: 0; width: 100%; height: 100%;
+      background: var(--url) center/cover no-repeat; opacity: .3; transition: opacity .1s ease;
+    }
+    .plane0 { transform: translateZ(-5px) scale(1.2); filter: blur(100px) var(--bc) }
+    .plane:nth-child(2) { transform: translateZ(30px);  filter: blur(20px)  var(--bc) }
+    .plane:nth-child(3) { transform: translateZ(60px);  filter: blur(35px)  var(--bc) }
+    .plane:nth-child(4) { transform: translateZ(90px);  filter: blur(50px)  var(--bc) }
+    .plane:nth-child(5) { transform: translateZ(120px); filter: blur(65px)  var(--bc) }
+    .plane:nth-child(6) { transform: translateZ(150px); filter: blur(80px)  var(--bc) }
+    .plane:nth-child(7) { transform: translateZ(180px); filter: blur(95px)  var(--bc) }
+    .plane:nth-child(8) { transform: translateZ(210px); filter: blur(110px) var(--bc) }
+    .plane:nth-child(9) { transform: translateZ(240px); filter: blur(125px) var(--bc) }
+    .section { background: #000; color: #fff; font-size: 2rem }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="screen">
+      <div class="plane plane0"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+      <div class="plane"></div>
+    </div>
+  </section>
+  <section class="section">Section 1</section>
+  <section class="section">Section 2</section>
+  <section class="section">Section 3</section>
+  <script>
+    const scr = document.querySelector('.screen'),
+          hero = document.querySelector('.hero'),
+          planes = document.querySelectorAll('.plane'),
+          sf = 0.4;
+    scr.style.transform = 'perspective(500px) rotateX(-45deg)';
+    scr.style.height = '100px';
+    scr.style.width = '260px';
+    window.addEventListener('scroll', () => {
+      let p = Math.min(scrollY / (hero.offsetHeight * sf), 1),
+          r = -45 + p * 45,
+          pers = 500 - p * (500 - 320),
+          h = 100 + p * (innerHeight - 100),
+          w = 260 + p * (innerWidth - 200),
+          br = 15 - p * 10,
+          seg = 1 / planes.length;
+      scr.style.transform = `perspective(${pers}px) rotateX(${r}deg)`;
+      scr.style.height = h + 'px';
+      scr.style.width = w + 'px';
+      scr.style.borderRadius = br + 'px';
+      planes.forEach((pl, i) => {
+        let ei = planes.length - 1 - i,
+            fs = ei * seg,
+            fe = fs + seg;
+        pl.style.opacity = p < fs ? .3 : p > fe ? 0 : .3 - ((p - fs) / seg);
+      });
+    });
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: t => Math.min(1, 1.001 - Math.pow(2, -12 * t)),
+      smooth: true,
+      direction: "vertical"
+    });
+    function raf(t) { lenis.raf(t); requestAnimationFrame(raf) }
+    requestAnimationFrame(raf);
+  </script>
+</body>
+</html>
